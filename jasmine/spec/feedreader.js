@@ -10,6 +10,14 @@ $(function() {
     /* 这是我们第一个测试用例 - 其中包含了一定数量的测试。这个用例的测试
      * 都是关于 Rss 源的定义的，也就是应用中的 allFeeds 变量。
     */
+
+    //检测url链接函数 利用正则表达检测链接是否正确
+    //正则表达https://developer.mozilla.org/zh-CN/docs/Web/JavaScript/Guide/Regular_Expressions
+    // function urltest(url){
+    //   var reg=/https?:\/\/[a-z0-9_.:]+\/[-a-z0-9_:@&?=+,.!/~*%$]*(\.(html|htm|shtml))?/;
+    //   return reg.test(url);
+    // };
+
     describe('RSS Feeds', function() {
         /* 这是我们的第一个测试 - 它用来保证 allFeeds 变量被定义了而且
          * 不是空的。在你开始做这个项目剩下的工作之前最好实验一下这个测试
@@ -25,14 +33,15 @@ $(function() {
         /* TODO:
          * 编写一个测试遍历 allFeeds 对象里面的所有的源来保证有链接字段而且链接不是空的。
          */
-        
+
         it('are linked', function() {
             var feedId=0;
+            var reg=/https?:\/\/[a-z0-9_.:]+\/[-a-z0-9_:@&?=+,.!/~*%$]*(\.(html|htm|shtml))?/;
+
             allFeeds.forEach(function(feed) {
                feed.id = feedId;
                expect(feed.url).toBeDefined();
-               expect(feed.url).toBe(true);
-
+               expect(feed.url).toMatch(reg);  //检测是否符合正则表达，来验证url是否为空
                feedId++;
             });
         });
@@ -40,11 +49,24 @@ $(function() {
         /* TODO:
          * 编写一个测试遍历 allFeeds 对象里面的所有的源来保证有名字字段而且不是空的。
          */
+        it('have names', function() {
+
+             allFeeds.forEach(function(feed) {    //forEach方法来遍历allFeeds数组
+                expect(feed.url).toBeDefined();
+                expect(feed.url).not.toBeNull();  //用toBeNull方法来检测name是否为空
+             });
+         });
     });
 
 
     /* TODO: 写一个叫做 "The menu" 的测试用例 */
+    describe ('The menu',function () {
+      it('',function () {
 
+        
+      });
+
+    });
         /* TODO:
          * 写一个测试用例保证菜单元素默认是隐藏的。你需要分析 html 和 css
          * 来搞清楚我们是怎么实现隐藏/展示菜单元素的。
