@@ -25,7 +25,17 @@ $(function() {
         /* TODO:
          * 编写一个测试遍历 allFeeds 对象里面的所有的源来保证有链接字段而且链接不是空的。
          */
+        
+        it('are linked', function() {
+            var feedId=0;
+            allFeeds.forEach(function(feed) {
+               feed.id = feedId;
+               expect(feed.url).toBeDefined();
+               expect(feed.url).toBe(true);
 
+               feedId++;
+            });
+        });
 
         /* TODO:
          * 编写一个测试遍历 allFeeds 对象里面的所有的源来保证有名字字段而且不是空的。
