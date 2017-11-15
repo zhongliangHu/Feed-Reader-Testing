@@ -47,7 +47,7 @@ function init() {
 
                  var container = $('.feed'),
                      title = $('.header-title'),
-                     entries = result.feed.entries,
+                     entries = result.feed.entries,   //返回的entry[]，有link,title等参数可参见handbars方法
                      entriesLen = entries.length,
                      entryTemplate = Handlebars.compile($('.tpl-entry').html());
 
@@ -104,11 +104,11 @@ $(function() {
     /* 当我们的源列表中的一个链接被点击的时候，我们想要隐藏菜单，加载该源，
      * 组织链接的默认点击行为发生。
      */
-    feedList.on('click', 'a', function() {
+    feedList.on('click', 'a', function() {      //on(events,[selector],[data],fn)
         var item = $(this);
 
         $('body').addClass('menu-hidden');
-        loadFeed(item.data('id'));
+        loadFeed(item.data('id'));       //-----data代表data:当一个事件被触发时要传递event.data给事件处理函数
         return false;
     });
 

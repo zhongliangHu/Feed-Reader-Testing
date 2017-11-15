@@ -61,11 +61,19 @@ $(function() {
 
     /* TODO: 写一个叫做 "The menu" 的测试用例 */
     describe ('The menu',function () {
-      it('',function () {
-
-        
+      //var body = document.getElementsByTagName('body');
+      var body = $('body');
+      var icon = $('.icon-list');
+      it('feed-list is hidden by default',function () {
+         expect(body[0].className).toContain('menu-hidden');
       });
 
+      it('feed-list could switch to be hidden or be shown',function () {
+         icon.click();
+         expect(body[0].className).not.toContain('menu-hidden');
+         icon.click();
+         expect(body[0].className).toContain('menu-hidden');
+      });
     });
         /* TODO:
          * 写一个测试用例保证菜单元素默认是隐藏的。你需要分析 html 和 css
