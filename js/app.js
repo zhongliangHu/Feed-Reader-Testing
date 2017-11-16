@@ -47,7 +47,7 @@ function init() {
 
                  var container = $('.feed'),
                      title = $('.header-title'),
-                     entries = result.feed.entries,   //返回的entry[]，有link,title等参数可参见handbars方法
+                     entries = result.feed.entries,   //返回的entry[]，有link,title等参数可参见Google Feed API指南
                      entriesLen = entries.length,
                      entryTemplate = Handlebars.compile($('.tpl-entry').html());
 
@@ -81,7 +81,7 @@ google.load('feeds', '1');
 google.setOnLoadCallback(init);
 
 /* 所有的这些功能都严重依赖 DOM 。所以把我们的代码放在 $ 函数里面以保证在 DOM
- * 构建完毕之前它不会被执行。
+ * 构建完毕之前它不会被执行。       ----文档加载完后再执行的方法: $(fn(){};);= $(document).ready(fn(){};);
  */
 $(function() {
     var container = $('.feed'),
@@ -104,6 +104,7 @@ $(function() {
     /* 当我们的源列表中的一个链接被点击的时候，我们想要隐藏菜单，加载该源，
      * 组织链接的默认点击行为发生。
      */
+
     feedList.on('click', 'a', function() {      //on(events,[selector],[data],fn)
         var item = $(this);
 
@@ -115,7 +116,12 @@ $(function() {
     /* 当菜单图标被点击的时候，我们需要在 body 元素上切换一个类名来实现
      * 菜单的显示状态的切换。
      */
-    menuIcon.on('click', function() {
+    // menuIcon.on('click', function() {
+    //     $('body').toggleClass('menu-hidden');
+    // });    --   与下面函数的两者区别？？？？
+    menuIcon.click(function() {
         $('body').toggleClass('menu-hidden');
     });
+
+
 }());
