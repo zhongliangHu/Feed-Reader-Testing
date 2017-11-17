@@ -47,7 +47,7 @@ function init() {
 
                  var container = $('.feed'),
                      title = $('.header-title'),
-                     entries = result.feed.entries,   //返回的entry[]，有link,title等参数可参见Google Feed API指南
+                     entries = result.feed.entries,   //返回的result中feed的entry[]，有link,title等参数可参见Google Feed API指南
                      entriesLen = entries.length,
                      entryTemplate = Handlebars.compile($('.tpl-entry').html());
 

@@ -105,20 +105,28 @@ $(function() {
          * 记住 loadFeed() 函数是异步的所以这个而是应该使用 Jasmine 的 beforeEach
          * 和异步的 done() 函数。
          */
-         describe ('Initial Entries',function () {
-           //var body = document.getElementsByTagName('body');
-           var body = $('body');
-           var icon = $('.icon-list');
-           it('feed-list is hidden by default',function () {
-              expect(body[0].className).toContain('menu-hidden');
+         describe('Initial Entries',function () {
+           //var container = $('.feed');
+           //var  entries = $('.entry');
+           // var entry = entries.length;
+
+           beforeEach(function(done){
+               //setTimeout(function(done){
+               loadFeed(0,done);
+            //},5);   --setTimeout运行作用？？？
+
+             // loadFeed(0,function (){
+             //   done();
+             // });    --与上面方法的区别是什么？？
+
+           });
+          // var  entries = $('.entry'); --若在it()外部定义entries无法获取loadFeed()运行后的返回的值
+           it('loadFeed is called normally',function (done) {
+              var  entries = $('.entry');
+              expect(entries.length).not.toBeLessThan(1);
+              done();
            });
 
-           it('feed-list could switch to be hidden or be shown',function () {
-              icon.click();
-              expect(body[0].className).not.toContain('menu-hidden');
-              //icon.click();
-              expect(body[0].className).toContain('menu-hidden');
-           });
          });
     /* TODO: 写一个叫做 "New Feed Selection" 的测试用例 */
 
@@ -126,4 +134,32 @@ $(function() {
          * 写一个测试保证当用 loadFeed 函数加载一个新源的时候内容会真的改变。
          * 记住，loadFeed() 函数是异步的。
          */
+         describe('New Feed Selection',function () {
+
+           var newloadFeed = loadFeed(1);
+           beforeAll(function(){
+             // foo = {
+             //     setBar:newloadFeed();
+             // }
+             //  spyOn(foo,'setBar');
+              newloadFeed = jasmine.createSpy('newloadFeed');
+              jasmine.clock().install();
+           });
+           afterEach(function(){
+              jasmine.clock().uninstall();
+           });
+
+           it('loadFeed has loaded again ',function () {
+              setTimeout(function(){
+                newloadFeed();
+              },6);
+              expect(newloadFeed).not.toHaveBeenCalled();
+              jasmine.clock().tick(7);
+              expect(newloadFeed).toHaveBeenCalled();
+
+           });
+
+
+
+         });
 }());
