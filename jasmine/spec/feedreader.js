@@ -112,13 +112,13 @@ $(function() {
 
            beforeEach(function(done){
                //setTimeout(function(done){
-               loadFeed(0,done);
+               //loadFeed(0,done);
             //},5);   --setTimeout运行作用？？？
 
              // loadFeed(0,function (){
              //   done();
              // });    --与上面方法的区别是什么？？
-
+             loadFeed(0,done);    //done()作为回调函数加载
            });
           // var  entries = $('.entry'); --若在it()外部定义entries无法获取loadFeed()运行后的返回的值
            it('loadFeed is called normally',function (done) {
@@ -136,13 +136,13 @@ $(function() {
          */
          describe('New Feed Selection',function () {
 
-           var newloadFeed = loadFeed(1);
+           var newloadFeed = loadFeed(2);
            beforeAll(function(){
              // foo = {
              //     setBar:newloadFeed();
              // }
              //  spyOn(foo,'setBar');
-              newloadFeed = jasmine.createSpy('newloadFeed');
+              newloadFeed = jasmine.createSpy('newloadFeed');  //利用spy和clock方法来检测是否加载了新源
               jasmine.clock().install();
            });
            afterEach(function(){
@@ -152,7 +152,7 @@ $(function() {
            it('loadFeed has loaded again ',function () {
               setTimeout(function(){
                 newloadFeed();
-              },6);
+              },6);                                //loadFeed(0)初始加载后6s后加载loadFeed(2)新源
               expect(newloadFeed).not.toHaveBeenCalled();
               jasmine.clock().tick(7);
               expect(newloadFeed).toHaveBeenCalled();
