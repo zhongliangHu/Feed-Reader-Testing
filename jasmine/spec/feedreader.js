@@ -136,7 +136,7 @@ $(function() {
          */
          describe('New Feed Selection',function () {
 
-           var newloadFeed = loadFeed(2);
+           var newloadFeed = loadFeed(1);
            beforeAll(function(){
              // foo = {
              //     setBar:newloadFeed();
@@ -149,7 +149,7 @@ $(function() {
               jasmine.clock().uninstall();
            });
 
-           it('loadFeed has loaded again ',function () {
+           it('loadFeed has loaded again',function () {
               setTimeout(function(){
                 newloadFeed();
               },6);                                //loadFeed(0)初始加载后6s后加载loadFeed(2)新源
