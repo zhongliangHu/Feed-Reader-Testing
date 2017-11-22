@@ -90,7 +90,7 @@ $(function() {
         icon.click();     //进行初次单击icon图标操作，feed-list是可见的
         expect(body[0].className).not.toContain('menu-hidden');
         icon.click();     //进行再次点击icon图标操作，feed-list是隐藏的
-        expect(body[0].className).toContain('menu-hidden');
+        expect(body.hasClass('menu-hidden')).toBe(true);
 
       });
     });
@@ -106,9 +106,6 @@ $(function() {
          * 和异步的 done() 函数。
          */
          describe('Initial Entries',function () {
-           //var container = $('.feed');
-           //var  entries = $('.entry');
-           // var entry = entries.length;
 
            beforeEach(function(done){
                //setTimeout(function(done){
@@ -121,10 +118,9 @@ $(function() {
              loadFeed(0,done);    //done()作为回调函数加载
            });
           // var  entries = $('.entry'); --若在it()外部定义entries无法获取loadFeed()运行后的返回的值
-           it('loadFeed is called normally',function (done) {
+           it('loadFeed is called normally',function () {
               var  entries = $('.entry');
               expect(entries.length).not.toBeLessThan(1);
-              done();
            });
 
          });
@@ -136,12 +132,24 @@ $(function() {
          */
          describe('New Feed Selection',function () {
 
-           var newloadFeed = loadFeed(1);
-           beforeAll(function(){
+           var newloadFeed = loadFeed(1),
+               newloadfeed,
+               oldloadfeed;       //需要在it()外声明newloadfeed和oldloadfeed,否则会undefined
+           beforeAll(function(done){
              // foo = {
              //     setBar:newloadFeed();
              // }
              //  spyOn(foo,'setBar');
+             loadFeed(0,function(){
+               oldloadfeed = $('.entry').html();
+               done();
+             });
+
+             loadFeed(1,function(){
+               newloadfeed = $('.entry').html();
+               done();
+             });
+
               newloadFeed = jasmine.createSpy('newloadFeed');  //利用spy和clock方法来检测是否加载了新源
               jasmine.clock().install();
            });
@@ -156,6 +164,8 @@ $(function() {
               expect(newloadFeed).not.toHaveBeenCalled();
               jasmine.clock().tick(7);
               expect(newloadFeed).toHaveBeenCalled();
+
+              expect(newloadfeed).not.toEqual(oldloadfeed);
 
            });
 
