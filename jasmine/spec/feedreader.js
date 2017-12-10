@@ -52,8 +52,8 @@ $(function() {
         it('have names', function() {
 
              allFeeds.forEach(function(feed) {    //forEach方法来遍历allFeeds数组
-                expect(feed.url).toBeDefined();
-                expect(feed.url).not.toBeNull();  //用toBeNull方法来检测name是否为空
+                expect(feed.name).toBeDefined();
+                expect(feed.name).not.toBeNull();  //用toBeNull方法来检测name是否为空
              });
          });
     });
@@ -164,12 +164,29 @@ $(function() {
               expect(newloadFeed).not.toHaveBeenCalled();
               jasmine.clock().tick(7);
               expect(newloadFeed).toHaveBeenCalled();
-
               expect(newloadfeed).not.toEqual(oldloadfeed);
 
            });
-
-
+            // 建议的第二种 更有效的方案
+            /* var text1,
+            *      text2;
+            * beforeEach(function(done) {
+            *     loadFeed(1, function() {
+            *         text1 = $('.feed').text();
+            *         console.log("1加载完了:" + text1);
+            *         loadFeed(0, function() {          //包裹在loadFeed(1,fn)内
+            *             text2 = $('.feed').text();
+            *             console.log("2加载完了" + text2);
+            *             done();
+            *         });
+            *     });
+            * });
+            *
+            * it("load container1", function() {
+            *     expect(text1).not.toEqual(text2);
+            *     // console.log("测试完成");
+            * });
+            */
 
          });
 }());

@@ -1,6 +1,9 @@
 
 ## Feed-Reader-Testing项目
 
+### 项目简介
+  
+
 ### 使用指南
 1. 下载该项目所有文件，双击`index.html`,即能显示Jasmine测试的各项结果。
 2. **"RSS Feeds"** 第一项测试,其中 **"are linked"** 测试利用正则表达来检测allFeeds对象所有源有链接且有效,因此用`forEach()`对allFeeds数组遍历,`toBeDefined()`查看是否都有链接,`toMatch()`查看链接是否符合有效。
