@@ -2,7 +2,7 @@
 ## Feed-Reader-Testing项目
 
 ### 项目简介
-  
+  Feed-Reader-Testing 项目是基于Web的RSS反馈阅读应用程序。利用Jasmine进行测试，Jasmine是面向行动驱动开发(BDD-behavior-driven development)的JavaScript单元测试框架。本项目将测试应用程序的业务逻辑、事件处理和DOM操作等方面。
 
 ### 使用指南
 1. 下载该项目所有文件，双击`index.html`,即能显示Jasmine测试的各项结果。

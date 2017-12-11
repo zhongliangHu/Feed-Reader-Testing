@@ -53,7 +53,9 @@ $(function() {
 
              allFeeds.forEach(function(feed) {    //forEach方法来遍历allFeeds数组
                 expect(feed.name).toBeDefined();
-                expect(feed.name).not.toBeNull();  //用toBeNull方法来检测name是否为空
+                //expect(feed.name).not.toEqual(""); //检测name不是空的
+                expect(feed.name.length).not.toBe(0); //检测字符长度是否为0，来检测name是否为空
+              //  expect(feed.name).not.toBeNull();  //注：用toBeNull方法 无法检测name是否为空
              });
          });
     });
@@ -108,14 +110,10 @@ $(function() {
          describe('Initial Entries',function () {
 
            beforeEach(function(done){
-               //setTimeout(function(done){
-               //loadFeed(0,done);
-            //},5);   --setTimeout运行作用？？？
-
-             // loadFeed(0,function (){
-             //   done();
-             // });    --与上面方法的区别是什么？？
-             loadFeed(0,done);    //done()作为回调函数加载
+             loadFeed(0,function (){
+               done();
+             });
+             //loadFeed(0,done);    //done()作为回调函数加载
            });
           // var  entries = $('.entry'); --若在it()外部定义entries无法获取loadFeed()运行后的返回的值
            it('loadFeed is called normally',function () {
