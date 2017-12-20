@@ -3,7 +3,8 @@
 
 ### 项目简介
   Feed-Reader-Testing 项目是基于Web的RSS反馈阅读应用程序。利用Jasmine进行测试，Jasmine是面向行动驱动开发(BDD-behavior-driven development)的JavaScript单元测试框架。本项目将测试应用程序的业务逻辑、事件处理和DOM操作等方面。
-
+  
+**Online version: https://zhonglianghu.github.io/Feed-Reader-Testing/**
 ### 使用指南
 1. 下载该项目所有文件，双击`index.html`,等待页面加载，在页面底部会显示Jasmine测试的各项测试内容和结果。具体各项测试原理请看以下详细介绍。
 2. **"RSS Feeds"** 第一项测试,其中 **"are linked"** 测试利用正则表达来检测allFeeds对象所有源有链接且有效,因此用`forEach()`对allFeeds数组遍历,`toBeDefined()`查看是否都有链接,`toMatch()`查看链接是否符合有效。
